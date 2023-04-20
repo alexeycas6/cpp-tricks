@@ -17,24 +17,39 @@ public:
     }
 };
 
-class derived : public base<derived>
+class derived1 : public base<derived1>
 {
     friend class base;
 
 private:
     void implementation()
     {
-        std::cout << "derived" << std::endl;
+        std::cout << "derived 1" << std::endl;
+    }
+};
+
+class derived2 : public base<derived2>
+{
+    friend class base;
+
+private:
+    void implementation()
+    {
+        std::cout << "derived 2" << std::endl;
     }
 };
 
 int main()
 {
-    derived *d = new derived();
-    d->interface(); // print "derived"
+    auto der1 = std::make_unique<derived1>();
+    der1->interface();               // print "derived 1"
+    auto der1_clone = der1->clone(); // clone() works
+    der1_clone->interface();         // print "derived 1"
 
-    auto t = d->clone();
-    t->interface(); // print "derived"
+    auto der2 = std::make_unique<derived2>();
+    der2->interface();               // print "derived 2"
+    auto der2_clone = der2->clone(); // clone() also already works
+    der2_clone->interface();         // print "derived 2"
 
     return 0;
 }
