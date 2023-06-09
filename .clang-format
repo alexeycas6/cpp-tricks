@@ -1,0 +1,13 @@
+BasedOnStyle: WebKit
+BreakBeforeBraces: Attach
+ColumnLimit: 80
+IncludeCategories:
+  #include <iostream>
+  - Regex: '<[a-z0-9_]*>'
+    Priority: 1
+    CaseSensitive: false
+
+  #include "AnyFile"
+  - Regex: '"*.*"'
+    Priority: 999
+    CaseSensitive: false
